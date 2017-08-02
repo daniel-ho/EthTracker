@@ -1,3 +1,5 @@
+// Credits: https://github.com/cryptoqween/cryptoqween.github.io
+
 var CCC = CCC || {};
 
 CCC.STATIC=CCC.STATIC || {};

@@ -1,3 +1,5 @@
+// Credits: https://github.com/cryptoqween/cryptoqween.github.io
+
 var quote = {};
 
 var createDom = function(pair) {
