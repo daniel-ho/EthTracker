@@ -47,6 +47,8 @@ var displayQuote = function(_quote) {
 	else if (quote.FLAGS === "4") {
 		document.getElementById("price").className = "";
 	}
+
+	document.title = "($" + _quote.PRICE + ") EthTracker"
 }
 
 var updateQuote = function(result) {
