@@ -1,5 +1,5 @@
 function plot(data) {
-	console.log("test");
+	console.log(data);
 }
 
 function updatePlot(url, plot_fn) {
