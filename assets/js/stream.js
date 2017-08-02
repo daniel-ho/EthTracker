@@ -27,7 +27,7 @@ var displayQuote = function(_quote) {
 	document.getElementById("market_" + pair).innerHTML = _quote.LASTMARKET;
 	document.getElementById("fsym_" + pair).innerHTML = _quote.FROMSYMBOL;
 	document.getElementById("tsym_" + pair).innerHTML = _quote.TOSYMBOL;
-	document.getElementById("price_" + pair).innerHTML = _quote.PRICE;
+	document.getElementById("price_" + pair).innerHTML = _quote.PRICE.toFixed(2);
 	document.getElementById("volume_" + pair).innerHTML = CCC.convertValueToDisplay(fsym, _quote.LASTVOLUME);
 	document.getElementById("volumeto_" + pair).innerHTML = CCC.convertValueToDisplay(tsym, _quote.LASTVOLUMETO);
 	document.getElementById("24volume_" + pair).innerHTML = CCC.convertValueToDisplay(fsym, _quote.VOLUME24HOUR);	
@@ -47,7 +47,7 @@ var displayQuote = function(_quote) {
 		document.getElementById("price").className = "";
 	}
 
-	document.title = "($" + _quote.PRICE + ") EthTracker"
+	document.title = "($" + _quote.PRICE.toFixed(2) + ") EthTracker"
 }
 
 var updateQuote = function(result) {
