@@ -2,7 +2,9 @@ var quote = {};
 
 var createDom = function(pair) {
 	var wrapper = document.getElementById("intro");
-	var html = '<div class="inner">';
+	var div = document.createElement("div");
+	div.className = "inner";
+	var html = '';
 	html += '<h1><span id="fsym_'+ pair +'"></span> - <span id="tsym_'+ pair +'"></span>   <strong><span class="price" id="price_'+ pair +'"></span></strong></h1>';
 	html += '<div class="label">24h Change: <span class="value" id="change_'+ pair +'"></span> (<span class="value" id="changepct_'+ pair +'"></span>)</div>';
 	html += '<div class="label">Last Market: <span class="market" id="market_'+ pair +'"></span></div>';
@@ -12,8 +14,8 @@ var createDom = function(pair) {
 	html += '<div class="label">24h Volume: <span class="value" id="24volume_'+ pair +'"></span></div>';
 	html += '<div class="label">24h VolumeTo: <span class="value" id="24volumeto_'+ pair +'"></span></div>';
 	html += '<div class="source"> Source: <a href="http://www.cryptocompare.com">CryptoCompare</a></div>';
-	html += '</div>';
-	wrapper.appendChild(html);
+	div.innerHTML = html;
+	wrapper.appendChild(div);
 };
 
 var displayQuote = function(_quote) {
