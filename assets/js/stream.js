@@ -47,6 +47,8 @@ var displayQuote = function(_quote) {
 	else if (quote.FLAGS === "4") {
 		document.getElementById("price").className = "";
 	}
+
+	document.title = "(" + _quote.TOSYMBOL + _quote.PRICE + ") EthTracker"
 }
 
 var updateQuote = function(result) {
@@ -57,7 +59,7 @@ var updateQuote = function(result) {
 		quote[pair] = {}
 		createDom(pair);
 	}
-	for (var i = 0; i <keys.length; ++i) {
+	for (var i = 0; i < keys.length; ++i) {
 		quote[pair][keys[i]] = result[keys[i]];
 	}
 	quote[pair]["CHANGE24H"] = quote[pair]["PRICE"] - quote[pair]["OPEN24HOUR"];
@@ -70,7 +72,7 @@ var socket = io.connect('https://streamer.cryptocompare.com/');
 //Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
 //Use SubscriptionId 0 for TRADE, 2 for CURRENT and 5 for CURRENTAGG
 //For aggregate quote updates use CCCAGG as market
-var subscription = ['5~CCCAGG~BTC~USD','5~CCCAGG~ETH~USD'];
+var subscription = ['5~CCCAGG~ETH~USD'];
 
 socket.emit('SubAdd', {subs:subscription} );
 
