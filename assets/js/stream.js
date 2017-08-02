@@ -3,7 +3,7 @@ var quote = {};
 var createDom = function(pair) {
 	var wrapper = document.getElementById("intro");
 	var div = document.createElement("div");
-	var html = '<div class="wrapper">';
+	var html = '<div class="inner">';
 	html += '<h1><span id="fsym_'+ pair +'"></span> - <span id="tsym_'+ pair +'"></span>   <strong><span class="price" id="price_'+ pair +'"></span></strong></h1>';
 	html += '<div class="label">24h Change: <span class="value" id="change_'+ pair +'"></span> (<span class="value" id="changepct_'+ pair +'"></span>)</div>';
 	html += '<div class="label">Last Market: <span class="market" id="market_'+ pair +'"></span></div>';
@@ -48,7 +48,7 @@ var displayQuote = function(_quote) {
 		document.getElementById("price").className = "";
 	}
 
-	document.title = "(" + _quote.TOSYMBOL + _quote.PRICE + ") EthTracker"
+	document.title = "($" + _quote.PRICE + ") EthTracker"
 }
 
 var updateQuote = function(result) {
