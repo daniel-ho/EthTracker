@@ -7,8 +7,9 @@ var plot = function(input) {
 	var timeToPrice = {};
 	for (var i = 0; i < data.length; i++) {
 		time = timeConverter(data[i]["time"]);
-		timeToPrice[time] = data[i]["close"];
+		timeToPrice[time] = data[i]["close"].toFixed(2);
 	}
+	console.log(timeToPrice.length);
 	console.log(timeToPrice);
 }
 
@@ -18,10 +19,17 @@ var timeConverter = function(timestamp) {
 	var year = date.getFullYear();
 	var month = months[date.getMonth()];
 	var day = date.getDate();
-	var hour = ("0" + date.getHours()).slice(-2);
-	var minute = ("0" + date.getMinutes()).slice(-2);
+	var hour = addZero(date.getHours());
+	var minute = addZero(date.getMinutes());
 	var time = hour + ":" + minute;
 	return time;
+}
+
+var addZero = function(n) {
+	if n < 10 {
+		n = "0" + n;
+	}
+	return n
 }
 
 var updatePlot = function() {
