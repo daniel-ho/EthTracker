@@ -39,7 +39,7 @@ var createChart = function(data) {
 	var width = $("section#charts").select().width();
 	var height = $("section#charts").select().height();
 	var svg = dimple.newSvg("section#charts", "100%", "60%");
-	svg.attr("viewBox"="0 0 " + width + " " + height);
+	svg.attr("viewBox", "0 0 " + width + " " + height);
 
 	ethChart = new dimple.chart(svg, data);
 	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
