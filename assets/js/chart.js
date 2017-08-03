@@ -8,7 +8,7 @@ var plot = function(input) {
 					.classed("svg-container", true)
 				.append("svg")
 					.attr("preserveAspectRatio", "xMinYMin meet")
-					.attr("viewBox", "0 0 600 400")
+					.attr("viewBox", "100 100 600 400")
 					.classed("svg-content-responsive", true)
 				.append("g")
 					.attr("class", "chart")
