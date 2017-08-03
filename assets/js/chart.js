@@ -18,8 +18,8 @@ var timeConverter = function(timestamp) {
 	var year = date.getFullYear();
 	var month = months[date.getMonth()];
 	var day = date.getDate();
-	var hour = date.getHours();
-	var minute = date.getMinutes();
+	var hour = date.getHours() > 9 ? date.getHours() : "0" + date.getHours();
+	var minute = date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getHours();
 	var time = hour + ":" + minute;
 	return time;
 }
