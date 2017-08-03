@@ -39,6 +39,7 @@ var reformatData = function(data) {
 		data[i]["time"] = timeConverter(data[i]["time"]);
 		data[i]["close"] = data[i]["close"].toFixed(2);
 	}
+	return data;
 }
 
 var timeConverter = function(timestamp) {
