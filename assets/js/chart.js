@@ -1,14 +1,12 @@
 var url = "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1440&e=CCCAGG"
 
-var plot = function(input) {
-	var data = reformatData(input["Data"]);
-
+var createChart = function(data) {
 	var svg = d3.select("section#charts")
 				.append("div")
 					.classed("svg-container", true)
 				.append("svg")
 					.attr("preserveAspectRatio", "xMinYMin meet")
-					.attr("viewBox", "100 100 600 400")
+					.attr("viewBox", "0 0 600 400")
 					.classed("svg-content-responsive", true)
 				.append("g")
 					.attr("class", "chart")
@@ -18,6 +16,13 @@ var plot = function(input) {
 	var y = ethChart.addMeasureAxis("y", "close");
 	ethChart.addSeries(null, dimple.plot.line);
 	ethChart.draw();
+}
+
+var plot = function(input) {
+	var data = reformatData(input["Data"]);
+	if (d3.select("section#charts").select("div").empty()) {
+		createChart(data)
+	}
 }
 
 var reformatData = function(data) {
