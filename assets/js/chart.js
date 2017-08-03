@@ -1,35 +1,7 @@
 var url = "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1440&e=CCCAGG"
 var ethChart = undefined;
 
-var createChart = function(data) {
-	/*var svg = d3.select("section#charts")
-				.append("div")
-					.classed("svg-container", true)
-				.append("svg")
-					.attr("preserveAspectRatio", "xMinYMin meet")
-					.attr("viewBox", "0 0 600 400")
-					.classed("svg-content-responsive", true)
-				.append("g")
-					.attr("class", "chart")*/
-	var svg = dimple.newSvg("section#charts", "100%", "100%");
-
-	ethChart = new dimple.chart(svg, data);
-	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
-	var y = ethChart.addMeasureAxis("y", "close");
-	y.overrideMin = 150;
-	var series = ethChart.addSeries(null, dimple.plot.line);
-	series.lineMarkers = true;
-	ethChart.draw();
-}
-
-var plot = function(input) {
-	var data = reformatData(input["Data"]);
-	if (ethChart === undefined) {
-		createChart(data);
-	} else {
-		ethChart.data = data;
-	}
-}
+/* Helper Functions for Parsing Input Data */
 
 var reformatData = function(data) {
 	var timeFrom = data["timeFrom"];
@@ -60,6 +32,33 @@ var addZero = function(n) {
 	return n
 }
 
+/* Main Plotting Code */
+
+// Create SVG for chart if doesn't exist
+var createChart = function(data) {
+	var svg = dimple.newSvg("section#charts", "100%", "100%");
+
+	ethChart = new dimple.chart(svg, data);
+	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
+	var y = ethChart.addMeasureAxis("y", "close");
+	y.overrideMin = 150;
+	var series = ethChart.addSeries(null, dimple.plot.line);
+	series.lineMarkers = true;
+	ethChart.draw();
+}
+
+// Callback function for plotting input data
+var plot = function(input) {
+	var data = reformatData(input["Data"]);
+	if (ethChart === undefined) {
+		createChart(data);
+	} else {
+		ethChart.data = data;
+		ethChart.draw();
+	}
+}
+
+// Update plot every minute
 var updatePlot = function() {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
@@ -72,4 +71,5 @@ var updatePlot = function() {
 	xhr.send();
 }
 
+updatePlot();
 setInterval(updatePlot, 60000);
