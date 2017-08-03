@@ -10,7 +10,7 @@ var createChart = function(data) {
 					.classed("svg-content-responsive", true)
 				.append("g")
 					.attr("class", "chart")*/
-	var svg = dimple.newSvg("section#charts", 100%, 100%)
+	var svg = dimple.newSvg("section#charts", "100%", "100%");
 
 	var ethChart = new dimple.chart(svg, data);
 	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
