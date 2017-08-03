@@ -6,10 +6,22 @@ var plot = function(input) {
 	var timeTo = input["timeTo"];
 	var timeToPrice = {};
 	for (var i = 0; i < data.length; i++) {
-		time = data[i]["time"]
-		timeToPrice[time] = data[i]["close"]
+		time = timeConverter(data[i]["time"]);
+		timeToPrice[time] = data[i]["close"];
 	}
 	console.log(timeToPrice);
+}
+
+var timeConverter(timestamp) {
+	var date = new Date(timestamp * 1000);
+	var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	var year = date.getFullYear();
+	var month = months[date.getMonth()];
+	var date = date.getDate();
+	var hour = date.getHours();
+	var minute = date.getMinutes();
+	var time = hour + ":" + minute;
+	return time;
 }
 
 var updatePlot = function() {
