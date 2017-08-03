@@ -26,7 +26,7 @@ var timeConverter = function(timestamp) {
 }
 
 var addZero = function(n) {
-	if n < 10 {
+	if (n < 10) {
 		n = "0" + n;
 	}
 	return n
