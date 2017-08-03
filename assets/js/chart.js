@@ -21,8 +21,8 @@ var plot = function(input) {
 }
 
 var reformatData = function(data) {
-	var timeFrom = input["timeFrom"];
-	var timeTo = input["timeTo"];
+	var timeFrom = data["timeFrom"];
+	var timeTo = data["timeTo"];
 	for (var i = 0; i < data.length; i++) {
 		data[i]["time"] = timeConverter(data[i]["time"]);
 		data[i]["close"] = data[i]["close"].toFixed(2);
