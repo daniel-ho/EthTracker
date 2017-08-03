@@ -1,19 +1,19 @@
 var url = "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1440&e=CCCAGG"
 
-function plot(data) {
+var plot = function(data) {
 	console.log(data);
 }
 
-function updatePlot() {
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function () {
+var updatePlot = function() {
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function () {
 		if (this.readyState === 4 && this.status === 200) {
 			var data = JSON.parse(this.responseText);
 			plot(data);
 		}
 	}
-	xmlhttp.open("GET", url, true);
-	xmlhttp.send();
+	xhr.open("GET", url, true);
+	xhr.send();
 }
 
 setInterval(updatePlot, 30000);
