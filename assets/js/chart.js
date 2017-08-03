@@ -1,4 +1,5 @@
 var url = "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1440&e=CCCAGG"
+var ethChart = undefined;
 
 var createChart = function(data) {
 	/*var svg = d3.select("section#charts")
@@ -12,22 +13,21 @@ var createChart = function(data) {
 					.attr("class", "chart")*/
 	var svg = dimple.newSvg("section#charts", "100%", "100%");
 
-	var ethChart = new dimple.chart(svg, data);
+	ethChart = new dimple.chart(svg, data);
 	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
 	var y = ethChart.addMeasureAxis("y", "close");
+	y.overrideMin = 150;
 	var series = ethChart.addSeries(null, dimple.plot.line);
 	series.lineMarkers = true;
 	ethChart.draw();
-
-	window.oneresize = function() {
-		ethChart.draw(0, true);
-	};
 }
 
 var plot = function(input) {
 	var data = reformatData(input["Data"]);
-	if (d3.select("section#charts").select("svg").empty()) {
-		createChart(data)
+	if (ethChart === undefined) {
+		createChart(data);
+	} else {
+		ethChart.data = data;
 	}
 }
 
