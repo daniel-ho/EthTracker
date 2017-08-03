@@ -1,16 +1,32 @@
 var url = "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1440&e=CCCAGG"
 
 var plot = function(input) {
-	var data = input["Data"];
+	var data = reformatData(input["Data"]);
+
+	var svg = d3.select("section#charts")
+				.append("div")
+					.classed("svg-container", true)
+				.append("svg")
+					.attr("preserveAspectRatio", "xMinYMin meet")
+					.attr("viewBox", "0 0 600 400")
+					.classed("svg-content-responsive", true)
+				.append("g")
+					.attr("class", "chart")
+
+	var ethChart = new dimple.chart(svg, data);
+	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
+	var y = ethChart.addMeasureAxis("y", "close");
+	ethChart.addSeries(null, dimple.plot.line);
+	ethChart.draw();
+}
+
+var reformatData = function(data) {
 	var timeFrom = input["timeFrom"];
 	var timeTo = input["timeTo"];
-	var timeToPrice = {};
 	for (var i = 0; i < data.length; i++) {
-		time = timeConverter(data[i]["time"]);
-		timeToPrice[time] = data[i]["close"].toFixed(2);
+		data[i]["time"] = timeConverter(data[i]["time"]);
+		data[i]["close"] = data[i]["close"].toFixed(2);
 	}
-	console.log(timeToPrice.length);
-	console.log(timeToPrice);
 }
 
 var timeConverter = function(timestamp) {
@@ -21,7 +37,7 @@ var timeConverter = function(timestamp) {
 	var day = date.getDate();
 	var hour = addZero(date.getHours());
 	var minute = addZero(date.getMinutes());
-	var time = hour + ":" + minute;
+	var time = year + " " + month + " " + day + " " + hour + ":" + minute;
 	return time;
 }
 
