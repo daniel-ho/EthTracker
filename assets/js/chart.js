@@ -12,7 +12,7 @@ var plot = function(input) {
 	console.log(timeToPrice);
 }
 
-var timeConverter(timestamp) {
+var timeConverter = function(timestamp) {
 	var date = new Date(timestamp * 1000);
 	var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	var year = date.getFullYear();
