@@ -1,3 +1,5 @@
+/* Author: Daniel Ho */
+
 /* Helper Functions for Parsing Input Data */
 
 var reformatData = function(data) {
@@ -38,14 +40,14 @@ var ethChart = undefined;
 var createChart = function(data) {
 	var width = $("section#charts").select().width();
 	var height = $("section#charts").select().height();
-	var svg = dimple.newSvg("section#charts", "100%", "60%");
+	var svg = dimple.newSvg("section#charts", "100%", "40%");
 	svg.attr("viewBox", "0 0 " + width + " " + height);
 
 	ethChart = new dimple.chart(svg, data);
 	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
 	var y = ethChart.addMeasureAxis("y", "close");
 	y.overrideMin = 150;
-	var series = ethChart.addSeries(null, dimple.plot.line);
+	var series = ethChart.addSeries(null, dimple.plot.area);
 	ethChart.draw();
 }
 
