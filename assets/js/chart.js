@@ -46,6 +46,7 @@ var createChart = function(data) {
 	ethChart = new dimple.chart(svg, data);
 	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
 	var y = ethChart.addMeasureAxis("y", "close");
+	y.tickFormat = ",.2f";
 	y.overrideMin = 150;
 	var series = ethChart.addSeries(null, dimple.plot.area);
 	ethChart.draw();
