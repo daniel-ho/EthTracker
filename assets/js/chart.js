@@ -39,7 +39,7 @@ var ethChart = undefined;
 // Create SVG for chart if doesn't exist
 var createChart = function(data, high, low) {
 	var width = $("section#charts").select().width();
-	var height = $("section#charts").select().height() - $("ul.actions").select().height();
+	var height = $("section#charts").select().height() - $("ul.actions").select().outerHeight(true);
 	var svg = dimple.newSvg("section#charts", "100%", "40%");
 	svg.attr("viewBox", "0 0 " + width + " " + height);
 
