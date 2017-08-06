@@ -47,11 +47,10 @@ var createChart = function(data, high, low) {
 	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
 	var y = ethChart.addMeasureAxis("y", "close");
 	y.tickFormat = ",.2f";
-	y.ticks = 10;
 	var diff = high - low;
 	var buffer = Math.round(diff/30) * 10;
 	y.overrideMax = high + buffer;
-	y.overrideMin = low - buffer;
+	y.overrideMin = 210;
 	var series = ethChart.addSeries(null, dimple.plot.area);
 	ethChart.draw();
 }
