@@ -50,7 +50,7 @@ var createChart = function(data, high, low) {
 	var diff = high - low;
 	var buffer = Math.round(diff/30) * 10;
 	y.overrideMax = high + buffer;
-	y.overrideMin = 210;
+	y.overrideMin = low - buffer;
 	var series = ethChart.addSeries(null, dimple.plot.area);
 	ethChart.draw();
 }
