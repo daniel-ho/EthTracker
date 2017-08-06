@@ -49,8 +49,8 @@ var createChart = function(data, high, low) {
 	y.tickFormat = ",.2f";
 	var diff = high - low;
 	var buffer = Math.round(diff/30) * 10;
-	y.overrideMax = high + buffer;
-	y.overrideMin = low - buffer;
+	y.overrideMax = Math.round(high + buffer);
+	y.overrideMin = Math.round(low - buffer);
 	var series = ethChart.addSeries(null, dimple.plot.area);
 	ethChart.draw();
 }
