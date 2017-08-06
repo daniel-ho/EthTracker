@@ -3,13 +3,13 @@
 /* Helper Functions for Parsing Input Data */
 
 var reformatData = function(data) {
-	var timeFrom = data["timeFrom"];
-	var timeTo = data["timeTo"];
 	for (var i = 0; i < data.length; i++) {
 		data[i]["time"] = timeConverter(data[i]["time"]);
 		data[i]["close"] = data[i]["close"].toFixed(2);
 	}
-	return data;
+	var high = Math.max.apply(null, data.map(function(x){return x.close}));
+	var low = Math.min.apply(null, data.map(function(x){return x.close}));
+	return [data, high, low];
 }
 
 var timeConverter = function(timestamp) {
@@ -37,7 +37,7 @@ var url = "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&
 var ethChart = undefined;
 
 // Create SVG for chart if doesn't exist
-var createChart = function(data) {
+var createChart = function(data, high, low) {
 	var width = $("section#charts").select().width();
 	var height = $("section#charts").select().height();
 	var svg = dimple.newSvg("section#charts", "100%", "40%");
@@ -47,16 +47,22 @@ var createChart = function(data) {
 	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
 	var y = ethChart.addMeasureAxis("y", "close");
 	y.tickFormat = ",.2f";
-	y.overrideMin = 150;
+	var diff = high - low;
+	var buffer = Math.round(diff/30) * 10;
+	y.overrideMax = high + buffer;
+	y.overrideMin = low - buffer;
 	var series = ethChart.addSeries(null, dimple.plot.area);
 	ethChart.draw();
 }
 
 // Callback function for plotting input data
 var plot = function(input) {
-	var data = reformatData(input["Data"]);
+	var formatted = reformatData(input["Data"]);
+	var data = formatted[0];
+	var high = formatted[1];
+	var low = formatted[2];
 	if (ethChart === undefined) {
-		createChart(data);
+		createChart(data, high, low);
 	} else {
 		ethChart.data = data;
 		//ethChart.draw(2000);
