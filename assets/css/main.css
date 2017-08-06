@@ -2654,7 +2654,7 @@
 
 	ul {
 		list-style: disc;
-		margin: 2em 2em 1em 2em;
+		margin: 0 0 2em 0;
 		padding-left: 1em;
 	}
 
@@ -2713,6 +2713,7 @@
 		ul.actions {
 			cursor: default;
 			list-style: none;
+			margin: 2em 2em 1em 2em;
 			padding-left: 0;
 		}
 
