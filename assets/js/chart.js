@@ -1,5 +1,16 @@
 /* Author: Daniel Ho */
 
+/* Map from zoom level to url for data */
+
+zoomToURL = {
+	'1y'		: "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=365&e=CCCAGG",
+	'3m'		: "https://min-api.cryptocompare.com/data/histohour?fsym=ETH&tsym=USD&limit=1116&aggregate=2&e=CCCAGG",
+	'1m'		: "https://min-api.cryptocompare.com/data/histohour?fsym=ETH&tsym=USD&limit=744&e=CCCAGG",
+	'1w'		: "https://min-api.cryptocompare.com/data/histohour?fsym=ETH&tsym=USD&limit=168&e=CCCAGG",
+	'1d'		: "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1440&e=CCCAGG",
+	'1h'		: "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=60&e=CCCAGG"
+}
+
 /* Helper Functions for Parsing Input Data */
 
 var reformatData = function(data) {
@@ -69,7 +80,7 @@ var plot = function(input) {
 	}
 }
 
-// Update plot every minute
+// Update plot once per minute
 var updatePlot = function() {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
@@ -86,5 +97,5 @@ updatePlot();
 setInterval(updatePlot, 60000);
 
 var testButton = function(zoom) {
-	console.log(zoom);
+	url = zoomToURL[zoom];
 }
