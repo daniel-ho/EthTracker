@@ -85,6 +85,6 @@ var updatePlot = function() {
 updatePlot();
 setInterval(updatePlot, 60000);
 
-var testButton = function() {
-	console.log("button works");
+var testButton = function(zoom) {
+	console.log(zoom);
 }
