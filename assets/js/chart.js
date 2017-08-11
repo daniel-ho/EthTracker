@@ -52,7 +52,7 @@ var curr_zoom = "1d";
 var createChart = function(data) {
 	var width = $("section#charts").select().width();
 	var height = $("section#charts").select().height() - $("ul.actions").select().outerHeight(true);
-	var svg = dimple.newSvg(id, "100%", "40%");
+	var svg = dimple.newSvg("section#charts", "100%", "40%");
 	svg.attr("viewBox", "0 0 " + width + " " + height);
 
 	ethChart = new dimple.chart(svg, data);
