@@ -96,7 +96,7 @@ var plot = function(input, zoom) {
 	var low = formatted[2];
 	var delay = 2000;
 	if (ethChart === undefined) {
-		ethChart = createChart(data);
+		createChart(data);
 		delay = 0;
 	} else {
 		ethChart.data = data;
