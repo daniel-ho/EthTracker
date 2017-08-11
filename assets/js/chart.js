@@ -45,27 +45,27 @@ zoomToInterval = {
 /* Main Plotting Code */
 
 var url = "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1440&e=CCCAGG"
-var ethChart = undefined;
+var ethChart = {value : undefined};
 var curr_zoom = "1d";
 
 // Create SVG for chart if doesn't exist
-var createChart = function(data) {
+var createChart = function(chart, id, data) {
 	var width = $("section#charts").select().width();
 	var height = $("section#charts").select().height() - $("ul.actions").select().outerHeight(true);
-	var svg = dimple.newSvg("section#charts", "100%", "40%");
+	var svg = dimple.newSvg(id, "100%", "40%");
 	svg.attr("viewBox", "0 0 " + width + " " + height);
 
-	ethChart = new dimple.chart(svg, data);
-	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
-	var y = ethChart.addMeasureAxis("y", "close");
+	chart.value = new dimple.chart(svg, data);
+	var x = chart.value.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
+	var y = chart.value.addMeasureAxis("y", "close");
 	y.tickFormat = ",.2f";
-	var series = ethChart.addSeries(null, dimple.plot.area);
+	var series = chart.value.addSeries(null, dimple.plot.area);
 }
 
-var drawChart = function(high, low, zoom, delay) {
+var drawChart = function(chart, high, low, zoom, delay) {
 	// Retrieve axes of chart
-	x = ethChart.axes[0];
-	y = ethChart.axes[1];
+	x = chart.value.axes[0];
+	y = chart.value.axes[1];
 
 	// Retrieve necessary zoom settings
 	tickFormat = zoomToTickFormat[zoom];
@@ -85,27 +85,27 @@ var drawChart = function(high, low, zoom, delay) {
 	y.overrideMin = Math.round((low - buffer)/5) * 5;
 
 	// Draw chart with delay
-	ethChart.draw(delay);
+	chart.value.draw(delay);
 }
 
 // Callback function for plotting input data
-var plot = function(input, zoom) {
+var plot = function(chart, id, input, zoom) {
 	var formatted = reformatData(input["Data"]);
 	var data = formatted[0];
 	var high = formatted[1];
 	var low = formatted[2];
 	var delay = 2000;
-	if (ethChart === undefined) {
-		createChart(data);
+	if (chart.value === undefined) {
+		createChart(chart, id, data);
 		delay = 0;
 	} else {
-		ethChart.data = data;
+		chart.value.data = data;
 	}
-	return drawChart(high, low, zoom, delay);
+	drawChart(chart, high, low, zoom, delay);
 }
 
 // Update plot once per minute
-var updatePlot = function(zoom) {
+var updatePlot = function(chart, id, zoom) {
 	curr_zoom = zoom;
 	url = zoomToURL[zoom];
 
@@ -114,13 +114,13 @@ var updatePlot = function(zoom) {
 	xhr.onreadystatechange = function () {
 		if (this.readyState === 4 && this.status === 200) {
 			var data = JSON.parse(this.responseText);
-			plot(data, zoom);
+			plot(chart, id, data, zoom);
 		}
 	}
 	xhr.open("GET", url, true);
 	xhr.send();
 }
 
-updatePlot(curr_zoom);
+updatePlot(ethChart, "section#charts", curr_zoom);
 // For future, implement feature to stop timer for higher zoom levels
-setInterval(function() {updatePlot(curr_zoom);}, 60000);
+setInterval(function() {updatePlot(ethChart, "section#charts", curr_zoom);}, 60000);
