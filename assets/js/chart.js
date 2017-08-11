@@ -76,7 +76,7 @@ var plot = function(input) {
 		createChart(data, high, low);
 	} else {
 		ethChart.data = data;
-		//ethChart.draw(2000);
+		ethChart.draw(2000);
 	}
 }
 
