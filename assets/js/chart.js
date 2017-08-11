@@ -1,6 +1,6 @@
 /* Author: Daniel Ho */
 
-/* Map from zoom level to url for data */
+/* Maps from zoom level to zoom specific data */
 
 zoomToURL = {
 	'1y'		: "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=365&e=CCCAGG",
@@ -9,6 +9,15 @@ zoomToURL = {
 	'1w'		: "https://min-api.cryptocompare.com/data/histohour?fsym=ETH&tsym=USD&limit=168&e=CCCAGG",
 	'1d'		: "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1440&e=CCCAGG",
 	'1h'		: "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=60&e=CCCAGG"
+}
+
+zoomToTickFormat = {
+	'1y'		: "%b %d %Y, %H:%M",
+	'3m'		: "%b %d, %H:%M",
+	'1m'		: "%b %d, %H:%M",
+	'1w'		: "%b %d, %H:%M",
+	'1d'		: "%H:%M",
+	'1h'		: "%H:%M"
 }
 
 /* Helper Functions for Parsing Input Data */
@@ -80,13 +89,12 @@ var drawChart = function(high, low, tickFormat, delay) {
 }
 
 // Callback function for plotting input data
-var plot = function(input) {
+var plot = function(input, tickFormat) {
 	var formatted = reformatData(input["Data"]);
 	var data = formatted[0];
 	var high = formatted[1];
 	var low = formatted[2];
 	var delay = 2000;
-	var tickFormat = "%H:%M"
 	if (ethChart === undefined) {
 		createChart(data);
 		delay = 0;
@@ -97,23 +105,22 @@ var plot = function(input) {
 }
 
 // Update plot once per minute
-var updatePlot = function() {
+var updatePlot = function(zoom) {
+	url = zoomToURL[zoom];
+	tickFormat = zoomToTickFormat[zoom];
+
 	// Make request for data
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
 		if (this.readyState === 4 && this.status === 200) {
 			var data = JSON.parse(this.responseText);
-			plot(data);
+			plot(data, tickFormat);
 		}
 	}
 	xhr.open("GET", url, true);
 	xhr.send();
 }
 
-updatePlot();
+updatePlot("1d");
 // For future, implement feature to stop timer for higher zoom levels
 setInterval(updatePlot, 60000);
-
-var testButton = function(zoom) {
-	url = zoomToURL[zoom];
-}
