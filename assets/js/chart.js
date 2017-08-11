@@ -55,7 +55,7 @@ var createChart = function(chart, id, data) {
 	var svg = dimple.newSvg(id, "100%", "40%");
 	svg.attr("viewBox", "0 0 " + width + " " + height);
 
-	ethChart = new dimple.chart(svg, data);
+	chart = new dimple.chart(svg, data);
 	var x = chart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
 	var y = chart.addMeasureAxis("y", "close");
 	y.tickFormat = ",.2f";
