@@ -1,6 +1,6 @@
 /* Author: Daniel Ho */
 
-/* Maps from zoom level to zoom specific data */
+/* Maps from zoom level to zoom specific settings */
 
 zoomToURL = {
 	'1y'		: "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=365&e=CCCAGG",
@@ -18,6 +18,24 @@ zoomToTickFormat = {
 	'1w'		: "%b %d, %H:%M",
 	'1d'		: "%H:%M",
 	'1h'		: "%H:%M"
+}
+
+zoomToPeriod = {
+	'1y'		: d3.time.months,
+	'3m'		: d3.time.weeks,
+	'1m'		: d3.time.days,
+	'1w'		: d3.time.hours,
+	'1d'		: d3.time.hours,
+	'1h'		: d3.time.minutes
+}
+
+zoomToInterval = {
+	'1y'		: 1,
+	'3m'		: 1,
+	'1m'		: 2,
+	'1w'		: 12,
+	'1d'		: 1,
+	'1h'		: 5
 }
 
 /* Helper Functions for Parsing Input Data */
@@ -70,15 +88,23 @@ var createChart = function(data) {
 	var series = ethChart.addSeries(null, dimple.plot.area);
 }
 
-var drawChart = function(high, low, tickFormat, delay) {
+var drawChart = function(high, low, zoom, delay) {
 	// Retrieve axes of ethChart
 	x = ethChart.axes[0];
 	y = ethChart.axes[1];
 
+	// Retrieve necessary zoom settings
+	tickFormat = zoomToTickFormat[zoom];
+	period = zoomToPeriod[zoom];
+	interval = zoomToInterval[zoom];
+
 	// Edit time axis format if necessary
 	x.tickFormat = tickFormat;
+	x.timePeriod = period;
+	x.timeInterval = interval;
 
 	// Edit measure axis min and max if necessary
+	// TODO: Configure so that y axis not cutoff on other zoom levels
 	var diff = high - low;
 	var buffer = Math.round(diff/30) * 10;
 	y.overrideMax = Math.round((high + buffer)/5) * 5;
@@ -89,7 +115,7 @@ var drawChart = function(high, low, tickFormat, delay) {
 }
 
 // Callback function for plotting input data
-var plot = function(input, tickFormat) {
+var plot = function(input, zoom) {
 	var formatted = reformatData(input["Data"]);
 	var data = formatted[0];
 	var high = formatted[1];
@@ -101,20 +127,19 @@ var plot = function(input, tickFormat) {
 	} else {
 		ethChart.data = data;
 	}
-	drawChart(high, low, tickFormat, delay);
+	drawChart(high, low, zoom, delay);
 }
 
 // Update plot once per minute
 var updatePlot = function(zoom) {
 	url = zoomToURL[zoom];
-	tickFormat = zoomToTickFormat[zoom];
 
 	// Make request for data
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
 		if (this.readyState === 4 && this.status === 200) {
 			var data = JSON.parse(this.responseText);
-			plot(data, tickFormat);
+			plot(data, zoom);
 		}
 	}
 	xhr.open("GET", url, true);
