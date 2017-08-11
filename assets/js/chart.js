@@ -49,24 +49,23 @@ var ethChart = undefined;
 var curr_zoom = "1d";
 
 // Create SVG for chart if doesn't exist
-var createChart = function(chart, id, data) {
+var createChart = function(data) {
 	var width = $("section#charts").select().width();
 	var height = $("section#charts").select().height() - $("ul.actions").select().outerHeight(true);
 	var svg = dimple.newSvg(id, "100%", "40%");
 	svg.attr("viewBox", "0 0 " + width + " " + height);
 
-	chart = new dimple.chart(svg, data);
-	var x = chart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
-	var y = chart.addMeasureAxis("y", "close");
+	ethChart = new dimple.chart(svg, data);
+	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
+	var y = ethChart.addMeasureAxis("y", "close");
 	y.tickFormat = ",.2f";
-	var series = chart.addSeries(null, dimple.plot.area);
-	return chart;
+	var series = ethChart.addSeries(null, dimple.plot.area);
 }
 
-var drawChart = function(chart, high, low, zoom, delay) {
+var drawChart = function(high, low, zoom, delay) {
 	// Retrieve axes of chart
-	x = chart.axes[0];
-	y = chart.axes[1];
+	x = ethChart.axes[0];
+	y = ethChart.axes[1];
 
 	// Retrieve necessary zoom settings
 	tickFormat = zoomToTickFormat[zoom];
@@ -86,29 +85,27 @@ var drawChart = function(chart, high, low, zoom, delay) {
 	y.overrideMin = Math.round((low - buffer)/5) * 5;
 
 	// Draw chart with delay
-	chart.draw(delay);
-
-	return chart;
+	ethChart.draw(delay);
 }
 
 // Callback function for plotting input data
-var plot = function(chart, id, input, zoom) {
+var plot = function(input, zoom) {
 	var formatted = reformatData(input["Data"]);
 	var data = formatted[0];
 	var high = formatted[1];
 	var low = formatted[2];
 	var delay = 2000;
-	if (chart === undefined) {
-		chart = createChart(chart, id, data);
+	if (ethChart === undefined) {
+		ethChart = createChart(id, data);
 		delay = 0;
 	} else {
-		chart.data = data;
+		ethChart.data = data;
 	}
-	return drawChart(chart, high, low, zoom, delay);
+	return drawChart(high, low, zoom, delay);
 }
 
 // Update plot once per minute
-var updatePlot = function(chart, id, zoom) {
+var updatePlot = function(zoom) {
 	curr_zoom = zoom;
 	url = zoomToURL[zoom];
 
@@ -117,15 +114,13 @@ var updatePlot = function(chart, id, zoom) {
 	xhr.onreadystatechange = function () {
 		if (this.readyState === 4 && this.status === 200) {
 			var data = JSON.parse(this.responseText);
-			chart = plot(chart, id, data, zoom);
+			plot(data, zoom);
 		}
 	}
-	console.log(url);
 	xhr.open("GET", url, true);
 	xhr.send();
-	return chart;
 }
 
-ethChart = updatePlot(ethChart, "section#charts", curr_zoom);
+updatePlot(curr_zoom);
 // For future, implement feature to stop timer for higher zoom levels
-setInterval(function() {ethChart = updatePlot(ethChart, "section#charts", curr_zoom)}, 60000);
+setInterval(function() {updatePlot(curr_zoom);}, 60000);
