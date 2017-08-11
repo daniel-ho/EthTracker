@@ -37,7 +37,7 @@ var getChartWidth = function(id) {
 
 var getChartHeight = function(id) {
 	var base = $(id).select().height();
-	if id === "section#charts" {
+	if (id === "section#charts") {
 		base -= $("ul.actions").select().outerHeight(true);
 	}
 	return base;
