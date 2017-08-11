@@ -20,12 +20,10 @@ var createDom = function(pair) {
 };
 
 var displayQuote = function(_quote) {
-
 	var fsym = CCC.STATIC.CURRENCY.SYMBOL[_quote.FROMSYMBOL];
 	var tsym = CCC.STATIC.CURRENCY.SYMBOL[_quote.TOSYMBOL];
 	var pair = _quote.FROMSYMBOL + _quote.TOSYMBOL;
-	console.log(_quote);
-	console.log(pair);
+	
 	document.getElementById("market_" + pair).innerHTML = _quote.LASTMARKET;
 	document.getElementById("fsym_" + pair).innerHTML = _quote.FROMSYMBOL;
 	document.getElementById("tsym_" + pair).innerHTML = _quote.TOSYMBOL;
