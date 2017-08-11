@@ -48,7 +48,7 @@ var url = "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&
 var ethChart = undefined;
 
 // Create SVG for chart if doesn't exist
-var createChart = function(data, high, low) {
+var createChart = function(data) {
 	var width = $("section#charts").select().width();
 	var height = $("section#charts").select().height() - $("ul.actions").select().outerHeight(true);
 	var svg = dimple.newSvg("section#charts", "100%", "40%");
@@ -58,12 +58,25 @@ var createChart = function(data, high, low) {
 	var x = ethChart.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
 	var y = ethChart.addMeasureAxis("y", "close");
 	y.tickFormat = ",.2f";
+	var series = ethChart.addSeries(null, dimple.plot.area);
+}
+
+var drawChart = function(high, low, tickFormat, delay) {
+	// Retrieve axes of ethChart
+	x = ethChart.axes[0];
+	y = ethChart.axes[1];
+
+	// Edit time axis format if necessary
+	x.tickFormat = tickFormat;
+
+	// Edit measure axis min and max if necessary
 	var diff = high - low;
 	var buffer = Math.round(diff/30) * 10;
 	y.overrideMax = Math.round((high + buffer)/5) * 5;
 	y.overrideMin = Math.round((low - buffer)/5) * 5;
-	var series = ethChart.addSeries(null, dimple.plot.area);
-	ethChart.draw();
+
+	// Draw chart with delay
+	ethChart.draw(delay);
 }
 
 // Callback function for plotting input data
@@ -72,12 +85,15 @@ var plot = function(input) {
 	var data = formatted[0];
 	var high = formatted[1];
 	var low = formatted[2];
+	var delay = 2000;
+	var tickFormat = "%H:%M"
 	if (ethChart === undefined) {
-		createChart(data, high, low);
+		createChart(data);
+		delay = 0;
 	} else {
 		ethChart.data = data;
-		ethChart.draw(2000);
 	}
+	drawChart(high, low, tickFormat, delay);
 }
 
 // Update plot once per minute
@@ -95,6 +111,7 @@ var updatePlot = function() {
 }
 
 updatePlot();
+// For future, implement feature to stop timer for higher zoom levels
 setInterval(updatePlot, 60000);
 
 var testButton = function(zoom) {
