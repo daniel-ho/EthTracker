@@ -13,7 +13,7 @@ zoomToURL = {
 }
 
 zoomToTickFormat = {
-	'All Time'	: "%b %d %Y"
+	'All Time'	: "%b %d %Y",
 	'1y'		: "%b %d %Y",
 	'3m'		: "%b %d, %H:%M",
 	'1m'		: "%b %d, %H:%M",
