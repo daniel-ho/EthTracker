@@ -120,6 +120,7 @@ var updatePlot = function(chart, id, zoom) {
 			chart = plot(chart, id, data, zoom);
 		}
 	}
+	console.log(url);
 	xhr.open("GET", url, true);
 	xhr.send();
 	return chart;
