@@ -73,6 +73,7 @@ var addZero = function(n) {
 
 var url = "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1440&e=CCCAGG"
 var ethChart = undefined;
+var curr_zoom = "1d";
 
 // Create SVG for chart if doesn't exist
 var createChart = function(data) {
@@ -132,6 +133,7 @@ var plot = function(input, zoom) {
 
 // Update plot once per minute
 var updatePlot = function(zoom) {
+	curr_zoom = zoom;
 	url = zoomToURL[zoom];
 
 	// Make request for data
@@ -146,6 +148,6 @@ var updatePlot = function(zoom) {
 	xhr.send();
 }
 
-updatePlot("1d");
+updatePlot(curr_zoom);
 // For future, implement feature to stop timer for higher zoom levels
-setInterval(updatePlot, 60000);
+setInterval(function() {updatePlot(curr_zoom)}, 60000);
