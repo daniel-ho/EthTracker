@@ -60,10 +60,11 @@ var createChart = function(chart, id, data) {
 	var y = chart.addMeasureAxis("y", "close");
 	y.tickFormat = ",.2f";
 	var series = chart.addSeries(null, dimple.plot.area);
+	return chart;
 }
 
 var drawChart = function(chart, high, low, zoom, delay) {
-	// Retrieve axes of ethChart
+	// Retrieve axes of chart
 	x = chart.axes[0];
 	y = chart.axes[1];
 
@@ -86,6 +87,8 @@ var drawChart = function(chart, high, low, zoom, delay) {
 
 	// Draw chart with delay
 	chart.draw(delay);
+
+	return chart;
 }
 
 // Callback function for plotting input data
@@ -96,12 +99,12 @@ var plot = function(chart, id, input, zoom) {
 	var low = formatted[2];
 	var delay = 2000;
 	if (chart === undefined) {
-		createChart(chart, id, data);
+		chart = createChart(chart, id, data);
 		delay = 0;
 	} else {
 		chart.data = data;
 	}
-	drawChart(chart, high, low, zoom, delay);
+	return drawChart(chart, high, low, zoom, delay);
 }
 
 // Update plot once per minute
@@ -114,13 +117,14 @@ var updatePlot = function(chart, id, zoom) {
 	xhr.onreadystatechange = function () {
 		if (this.readyState === 4 && this.status === 200) {
 			var data = JSON.parse(this.responseText);
-			plot(chart, id, data, zoom);
+			chart = plot(chart, id, data, zoom);
 		}
 	}
 	xhr.open("GET", url, true);
 	xhr.send();
+	return chart;
 }
 
-updatePlot(ethChart, "section#charts", curr_zoom);
+ethChart = updatePlot(ethChart, "section#charts", curr_zoom);
 // For future, implement feature to stop timer for higher zoom levels
-setInterval(function() {updatePlot(ethChart, "section#charts", curr_zoom)}, 60000);
+setInterval(function() {ethChart = updatePlot(ethChart, "section#charts", curr_zoom)}, 60000);
