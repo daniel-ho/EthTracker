@@ -50,8 +50,8 @@ var curr_zoom = "1d";
 
 // Create SVG for chart if doesn't exist
 var createChart = function(chart, id, data) {
-	var width = $("section#charts").select().width();
-	var height = $("section#charts").select().height() - $("ul.actions").select().outerHeight(true);
+	var width = getChartWidth(id);
+	var height = getChartHeight(id);
 	var svg = dimple.newSvg(id, "100%", "40%");
 	svg.attr("viewBox", "0 0 " + width + " " + height);
 

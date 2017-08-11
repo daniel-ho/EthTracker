@@ -30,3 +30,15 @@ var addZero = function(n) {
 	}
 	return n
 }
+
+var getChartWidth = function(id) {
+	return $("section#charts").select().width();
+}
+
+var getChartHeight = function(id) {
+	var base = $(id).select().height();
+	if id === "section#charts" {
+		base -= $("ul.actions").select().outerHeight(true);
+	}
+	return base;
+}
