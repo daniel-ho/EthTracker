@@ -82,6 +82,7 @@ var plot = function(input) {
 
 // Update plot once per minute
 var updatePlot = function() {
+	// Make request for data
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function () {
 		if (this.readyState === 4 && this.status === 200) {
