@@ -58,7 +58,7 @@ var plot = function(chart, id, input, zoom) {
 		createChart(chart, id, data);
 		delay = 0;
 	} else {
-		chart.value.data = data;
+		chart.value.series[0].data = data;
 	}
 	drawChart(chart, high, low, zoom, delay);
 }
