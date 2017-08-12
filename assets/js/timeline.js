@@ -8,9 +8,8 @@ timelineData = [{"time" : "2017 Jul 18 00:00", "close" : "194.41", "Event" : "EE
 				{"time" : "2017 Aug 1 00:00", "close" : "218.12", "Event" : "Bitcoin Hard Fork"}]
 
 var overlayEvents = function() {
-	eventSeries = timelineChart.value.addSeries(null, dimple.plot.bubble);
+	eventSeries = timelineChart.value.addSeries("Event", dimple.plot.bubble);
 	eventSeries.data = timelineData;
-	timelineChart.value.addMeasureAxis("z", "Event");
 }
 
 updatePlot(timelineChart, "section#timeline", "All Time", overlayEvents);
