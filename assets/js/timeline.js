@@ -10,7 +10,7 @@ timelineData = [{"time" : "2017 Jul 18 00:00", "close" : "194.41", "Event" : "EE
 var overlayEvents = function() {
 	x = timelineChart.value.axes[0];
 	y = timelineChart.value.axes[1];
-	z = timelineChart.addColorAxis("Event", "green");
+	z = timelineChart.value.addColorAxis("Event", "green");
 	eventSeries = timelineChart.value.addSeries(null, dimple.plot.bubble, [x, y, z]);
 	eventSeries.data = timelineData;
 }
