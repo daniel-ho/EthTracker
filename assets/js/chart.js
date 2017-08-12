@@ -7,7 +7,7 @@ var ethChart = {value 	  : undefined,
 				curr_zoom : "1d"};
 
 // Create SVG for chart if doesn't exist
-var createChart = function(chart, id, data) {
+var createChart = function(chart, id, data, overlay_callback) {
 	var width = getChartWidth(id);
 	var height = getChartHeight(id);
 	var svg = dimple.newSvg(id, "100%", "40%");
@@ -19,6 +19,9 @@ var createChart = function(chart, id, data) {
 	y.tickFormat = ",.2f";
 	var series = chart.value.addSeries(null, dimple.plot.area);
 	series.data = data;
+	if (overlay_callback !== null) {
+		overlay_callback();
+	}
 }
 
 var drawChart = function(chart, high, low, zoom, delay) {
@@ -48,14 +51,14 @@ var drawChart = function(chart, high, low, zoom, delay) {
 }
 
 // Callback function for plotting input data
-var plot = function(chart, id, input, zoom) {
+var plot = function(chart, id, input, zoom, overlay_callback) {
 	var formatted = reformatData(input["Data"]);
 	var data = formatted[0];
 	var high = formatted[1];
 	var low = formatted[2];
 	var delay = 2000;
 	if (chart.value === undefined) {
-		createChart(chart, id, data);
+		createChart(chart, id, data, overlay_callback);
 		delay = 0;
 	} else {
 		chart.value.series[0].data = data;
@@ -64,7 +67,7 @@ var plot = function(chart, id, input, zoom) {
 }
 
 // Update plot once per minute
-var updatePlot = function(chart, id, zoom) {
+var updatePlot = function(chart, id, zoom, overlay_callback) {
 	chart.curr_zoom = zoom;
 	chart.url = zoomToURL[zoom];
 
@@ -73,13 +76,13 @@ var updatePlot = function(chart, id, zoom) {
 	xhr.onreadystatechange = function () {
 		if (this.readyState === 4 && this.status === 200) {
 			var data = JSON.parse(this.responseText);
-			plot(chart, id, data, zoom);
+			plot(chart, id, data, zoom, overlay_callback);
 		}
 	}
 	xhr.open("GET", chart.url, true);
 	xhr.send();
 }
 
-updatePlot(ethChart, "section#charts", '1d');
+updatePlot(ethChart, "section#charts", '1d', null);
 // For future, implement feature to stop timer for higher zoom levels
-setInterval(function() {updatePlot(ethChart, "section#charts", ethChart.curr_zoom);}, 60000);
+setInterval(function() {updatePlot(ethChart, "section#charts", ethChart.curr_zoom, null);}, 60000);
