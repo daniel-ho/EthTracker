@@ -1,5 +1,47 @@
 /* Author: Daniel Ho */
 
+/* Maps from zoom level to zoom specific settings */
+
+zoomToURL = {
+	'All Time'	: "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&e=CCCAGG&allData=true",
+	'1y'		: "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=365&e=CCCAGG",
+	'3m'		: "https://min-api.cryptocompare.com/data/histohour?fsym=ETH&tsym=USD&limit=1116&aggregate=2&e=CCCAGG",
+	'1m'		: "https://min-api.cryptocompare.com/data/histohour?fsym=ETH&tsym=USD&limit=744&e=CCCAGG",
+	'1w'		: "https://min-api.cryptocompare.com/data/histohour?fsym=ETH&tsym=USD&limit=168&e=CCCAGG",
+	'1d'		: "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=1440&e=CCCAGG",
+	'1h'		: "https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=60&e=CCCAGG"
+}
+
+zoomToTickFormat = {
+	'All Time'	: "%b %d %Y",
+	'1y'		: "%b %d %Y",
+	'3m'		: "%b %d, %H:%M",
+	'1m'		: "%b %d, %H:%M",
+	'1w'		: "%b %d, %H:%M",
+	'1d'		: "%H:%M",
+	'1h'		: "%H:%M"
+}
+
+zoomToPeriod = {
+	'All Time'	: d3.time.months,
+	'1y'		: d3.time.months,
+	'3m'		: d3.time.weeks,
+	'1m'		: d3.time.days,
+	'1w'		: d3.time.hours,
+	'1d'		: d3.time.hours,
+	'1h'		: d3.time.minutes
+}
+
+zoomToInterval = {
+	'All Time'	: 2,
+	'1y'		: 1,
+	'3m'		: 1,
+	'1m'		: 2,
+	'1w'		: 12,
+	'1d'		: 1,
+	'1h'		: 5
+}
+
 /* Helper Functions for Parsing Input Data */
 
 var reformatData = function(data) {
