@@ -13,11 +13,12 @@ var createChart = function(chart, id, data) {
 	var svg = dimple.newSvg(id, "100%", "40%");
 	svg.attr("viewBox", "0 0 " + width + " " + height);
 
-	chart.value = new dimple.chart(svg, data);
+	chart.value = new dimple.chart(svg);
 	var x = chart.value.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
 	var y = chart.value.addMeasureAxis("y", "close");
 	y.tickFormat = ",.2f";
 	var series = chart.value.addSeries(null, dimple.plot.area);
+	series.data = data;
 }
 
 var drawChart = function(chart, high, low, zoom, delay) {
