@@ -26,13 +26,13 @@ var createChart = function(chart, id, data, overlay_callback) {
 
 var drawChart = function(chart, high, low, zoom, delay) {
 	// Retrieve axes of chart
-	x = chart.value.axes[0];
-	y = chart.value.axes[1];
+	var x = chart.value.axes[0];
+	var y = chart.value.axes[1];
 
 	// Retrieve necessary zoom settings
-	tickFormat = zoomToTickFormat[zoom];
-	period = zoomToPeriod[zoom];
-	interval = zoomToInterval[zoom];
+	var tickFormat = zoomToTickFormat[zoom];
+	var period = zoomToPeriod[zoom];
+	var interval = zoomToInterval[zoom];
 
 	// Edit time axis format if necessary
 	x.tickFormat = tickFormat;
@@ -43,8 +43,10 @@ var drawChart = function(chart, high, low, zoom, delay) {
 	// TODO: Configure so that y axis not cutoff on other zoom levels
 	var diff = high - low;
 	var buffer = Math.round(diff/30) * 10;
-	y.overrideMax = Math.round((high + buffer)/5) * 5;
-	y.overrideMin = Math.round((low - buffer)/5) * 5;
+	var lowerBound = Math.round((low - buffer)/5) * 5;
+	var upperBound = Math.round((high + buffer)/5) * 5;
+	y.overrideMin = Math.max(0, lowerBound);
+	y.overrideMax = upperBound;
 
 	// Draw chart with delay
 	chart.value.draw(delay);
