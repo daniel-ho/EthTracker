@@ -39,3 +39,11 @@ var overlayEvents = function() {
 }
 
 updatePlot(timelineChart, "section#timeline", "All Time", overlayEvents);
+
+window.onresize = function() {
+	var id = "section#timeline"
+	var width = getChartWidth(id);
+	var height = getChartHeight(id);
+	timelineChart.value.svg[0][0].setAttribute("viewBox", "0 0 " + width + " " + height);
+	timelineChart.value.draw(0, true);
+}

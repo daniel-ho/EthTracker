@@ -99,6 +99,6 @@ window.onresize = function() {
 	var id = "section#charts"
 	var width = getChartWidth(id);
 	var height = getChartHeight(id);
-	ethChart.value.svg[0][0].attr("viewBox", "0 0 " + width + " " + height);
-	chart.value.draw(0, true);
+	ethChart.value.svg[0][0].setAttribute("viewBox", "0 0 " + width + " " + height);
+	ethChart.value.draw(0, true);
 }
