@@ -43,9 +43,14 @@ var drawChart = function(chart, high, low, zoom, delay) {
 	var diff = high - low;
 	var buffer = Math.round(diff/4);
 	var lowerBound = Math.round((low - buffer)/5) * 5;
-	var upperBound = high + buffer;
-	y.overrideMin = Math.max(0, lowerBound);
-	y.overrideMax = upperBound;
+	if (lowerBound < 0) {
+		y.overrideMin = 0;
+		y.overrideMax = high + buffer/2;
+	} else {
+		y.overrideMin = lowerBound;
+		y.overrideMax = high + buffer;
+	}
+	
 
 	// Draw chart with delay
 	chart.value.draw(delay);
