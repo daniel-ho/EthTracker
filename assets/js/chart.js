@@ -41,7 +41,7 @@ var drawChart = function(chart, high, low, zoom, delay) {
 
 	// Edit measure axis min and max if necessary
 	var diff = high - low;
-	var buffer = Math.round(diff/60) * 10;
+	var buffer = Math.round(diff/4);
 	var lowerBound = Math.round((low - buffer)/5) * 5;
 	var upperBound = high + buffer;
 	y.overrideMin = Math.max(0, lowerBound);
