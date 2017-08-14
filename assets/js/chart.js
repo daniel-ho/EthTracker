@@ -96,5 +96,9 @@ updatePlot(ethChart, "section#charts", '1d', null);
 setInterval(function() {updatePlot(ethChart, "section#charts", ethChart.curr_zoom, null);}, 60000);
 
 window.onresize = function() {
-	ethChart.value.draw(0, true);
+	var id = "section#charts"
+	var width = getChartWidth(id);
+	var height = getChartHeight(id);
+	ethChart.value.svg[0][0].attr("viewBox", "0 0 " + width + " " + height);
+	chart.value.draw(0, true);
 }
