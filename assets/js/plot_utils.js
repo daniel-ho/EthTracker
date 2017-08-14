@@ -104,7 +104,9 @@ var getTickStep = function(diff) {
 		return 5;
 	} else if (diff > 5) {
 		return 2;
+	} else if (diff > 2) {
+		return 0.5;
 	} else {
-		return 1;
+		return 0.2;
 	}
 }
