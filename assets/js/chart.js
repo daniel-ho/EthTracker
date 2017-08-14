@@ -47,7 +47,7 @@ var drawChart = function(chart, high, low, zoom, delay) {
 		y.overrideMin = 0;
 		y.overrideMax = high + buffer/2;
 	} else {
-		y.overrideMin = Math.round(lowerBound/y._tick_step) * y._tick_step;
+		y.overrideMin = lowerBound;
 		y.overrideMax = high + buffer;
 	}
 	//y.ticks = ;
