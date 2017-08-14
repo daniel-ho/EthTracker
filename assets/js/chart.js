@@ -44,7 +44,7 @@ var drawChart = function(chart, high, low, zoom, delay) {
 	var buffer = diff/4;
 	var lowerBound = low - buffer;
 	var tick_scale = 1;
-	
+
 	if (lowerBound < 0) {
 		y.overrideMin = 0;
 		y.overrideMax = high + buffer/2;
@@ -90,6 +90,7 @@ var updatePlot = function(chart, id, zoom, overlay_callback) {
 	xhr.send();
 }
 
+// TODO: Replot chart when window resizes
 updatePlot(ethChart, "section#charts", '1d', null);
-// For future, implement feature to stop timer for higher zoom levels
+// TODO: Stop timer for higher zoom levels
 setInterval(function() {updatePlot(ethChart, "section#charts", ethChart.curr_zoom, null);}, 60000);
