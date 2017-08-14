@@ -52,7 +52,7 @@ var drawChart = function(chart, high, low, zoom, delay) {
 		y.overrideMin = 0;
 		y.overrideMax = high + buffer/2;
 	} else {
-		y.overrideMin = Math.floor(Math.floor(lowerBound/tick_scale) * tick_scale);
+		y.overrideMin = Math.floor(lowerBound/tick_scale) * tick_scale;
 		y.overrideMax = high + buffer;
 	}
 

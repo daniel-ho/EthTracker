@@ -3578,6 +3578,10 @@
 			width: 100%;
 		}
 
+			#sidebar > .inner > h2 {
+				color: #80B1D3;
+			}
+
 			body.is-ie #sidebar > .inner {
 				height: 100%;
 			}
