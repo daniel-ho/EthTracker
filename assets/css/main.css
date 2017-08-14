@@ -1639,7 +1639,7 @@
 /* Type */
 
 	body, input, select, textarea {
-		color: rgba(255, 255, 255, 0.55);
+		color: rgba(0, 0, 0, 0.55);
 		font-family: Arial, Helvetica, sans-serif;
 		font-size: 16.5pt;
 		font-weight: normal;
@@ -1708,6 +1708,10 @@
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 			color: inherit;
 			text-decoration: none;
+		}
+
+		h1 span, h1 strong {
+			color: #000000;
 		}
 
 	h1 {
@@ -1976,7 +1980,7 @@
 		button.special,
 		.button.special {
 			background-color: #ffffff;
-			color: #312450 !important;
+			color: #000000 !important;
 		}
 
 			input[type="submit"].special:after,
@@ -2567,7 +2571,7 @@
 				}
 
 				.wrapper.style1-alt .icon.major:before {
-					color: #493382;
+					color: #2d2d2d;
 				}
 
 				.wrapper.style2 .icon.major:before {
@@ -3254,7 +3258,7 @@
 		}
 
 		.wrapper.style1 {
-			background-color: #2d2d2d;
+			background-color: #e9e9e9;
 		}
 
 		.wrapper.style1-alt {
@@ -3270,7 +3274,7 @@
 		}
 
 		.wrapper.style3 {
-			background-color: #6a6b73;
+			background-color: #e9e9e9;
 		}
 
 		.wrapper.style3-alt {
@@ -3535,7 +3539,7 @@
 
 	#sidebar {
 		padding: 2.5em 2.5em 0.5em 2.5em ;
-		background: #312450;
+		background: #2d2d2d;
 		cursor: default;
 		height: 100vh;
 		left: 0;
