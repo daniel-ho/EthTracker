@@ -3843,7 +3843,7 @@
 
 				#sidebar h2 {
 					line-height: inherit;
-					margin: 0 0 0 2em;
+					margin-right: 2em;
 				}
 
 				#sidebar nav {
