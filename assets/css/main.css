@@ -3841,6 +3841,11 @@
 					line-height: inherit;
 				}
 
+				#sidebar h2 {
+					line-height: inherit;
+					margin: 0 0 0 2em;
+				}
+
 				#sidebar nav {
 					height: inherit;
 					line-height: inherit;
