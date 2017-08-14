@@ -40,11 +40,10 @@ var drawChart = function(chart, high, low, zoom, delay) {
 	x.timeInterval = interval;
 
 	// Edit measure axis min and max if necessary
-	// TODO: Configure so that y axis not cutoff on other zoom levels
 	var diff = high - low;
 	var buffer = Math.round(diff/60) * 10;
 	var lowerBound = Math.round((low - buffer)/5) * 5;
-	var upperBound = Math.round((high + buffer)/5) * 5;
+	var upperBound = high + buffer;
 	y.overrideMin = Math.max(0, lowerBound);
 	y.overrideMax = upperBound;
 
