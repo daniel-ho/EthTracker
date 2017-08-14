@@ -90,7 +90,6 @@ var updatePlot = function(chart, id, zoom, overlay_callback) {
 	xhr.send();
 }
 
-// TODO: Replot chart when window resizes
 updatePlot(ethChart, "section#charts", '1d', null);
 // TODO: Stop timer for higher zoom levels
 setInterval(function() {updatePlot(ethChart, "section#charts", ethChart.curr_zoom, null);}, 60000);
