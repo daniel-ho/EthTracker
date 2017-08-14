@@ -15,8 +15,8 @@ zoomToURL = {
 zoomToTickFormat = {
 	'All Time'	: "%b %d %Y",
 	'1y'		: "%b %d %Y",
-	'3m'		: "%b %d, %H:%M",
-	'1m'		: "%b %d, %H:%M",
+	'3m'		: "%b %d",
+	'1m'		: "%b %d",
 	'1w'		: "%b %d, %H:%M",
 	'1d'		: "%H:%M",
 	'1h'		: "%H:%M"
@@ -83,4 +83,18 @@ var getChartHeight = function(id) {
 		base -= $("ul.actions").select().outerHeight(true);
 	}
 	return base;
+}
+
+var getTickStep = function(diff) {
+	if (diff > 100) {
+		return 50;
+	} else if (diff > 40) {
+		return 10;
+	} else if (diff > 20) {
+		return 5;
+	} else if (diff > 5) {
+		return 2;
+	} else {
+		return 0.5;
+	}
 }

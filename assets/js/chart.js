@@ -43,7 +43,7 @@ var drawChart = function(chart, high, low, zoom, delay) {
 	var diff = high - low;
 	var buffer = diff/4;
 	var lowerBound = low - buffer;
-	var tick_scale = 1;
+	var tick_scale = getTickStep(diff);
 
 	if (lowerBound < 0) {
 		y.overrideMin = 0;
