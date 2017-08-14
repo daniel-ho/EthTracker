@@ -10,7 +10,7 @@ var ethChart = {value 	  : undefined,
 var createChart = function(chart, id, data, overlay_callback) {
 	var width = getChartWidth(id);
 	var height = getChartHeight(id);
-	var svg = dimple.newSvg(id, "100%", "40%");
+	var svg = dimple.newSvg(id, "100%", "100%");
 	svg.attr("viewBox", "0 0 " + width + " " + height);
 
 	chart.value = new dimple.chart(svg);
