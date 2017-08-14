@@ -15,7 +15,9 @@ var createChart = function(chart, id, data, overlay_callback) {
 
 	chart.value = new dimple.chart(svg);
 	var x = chart.value.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
+	x.title = null;
 	var y = chart.value.addMeasureAxis("y", "close");
+	y.title = "Closing Price";
 	y.tickFormat = ",.2f";
 	var series = chart.value.addSeries(null, dimple.plot.area);
 	series.data = data;
