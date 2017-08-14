@@ -42,6 +42,16 @@ zoomToInterval = {
 	'1h'		: 5
 }
 
+zoomToLabel = {
+	'All Time'	: "Date",
+	'1y'		: "Date",
+	'3m'		: "Date",
+	'1m'		: "Date",
+	'1w'		: "Time",
+	'1d'		: "Time",
+	'1h'		: "Time"
+}
+
 /* Helper Functions for Parsing Input Data */
 
 var reformatData = function(data) {

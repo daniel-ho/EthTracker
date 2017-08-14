@@ -15,7 +15,6 @@ var createChart = function(chart, id, data, overlay_callback) {
 
 	chart.value = new dimple.chart(svg);
 	var x = chart.value.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
-	x.title = null;
 	var y = chart.value.addMeasureAxis("y", "close");
 	y.title = "Closing Price";
 	y.tickFormat = ",.2f";
@@ -32,11 +31,13 @@ var drawChart = function(chart, high, low, zoom, delay) {
 	var y = chart.value.axes[1];
 
 	// Retrieve necessary zoom settings
+	var label = zoomToLabel[zoom];
 	var tickFormat = zoomToTickFormat[zoom];
 	var period = zoomToPeriod[zoom];
 	var interval = zoomToInterval[zoom];
 
 	// Edit time axis format if necessary
+	x.title = label;
 	x.tickFormat = tickFormat;
 	x.timePeriod = period;
 	x.timeInterval = interval;
