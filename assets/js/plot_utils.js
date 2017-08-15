@@ -121,7 +121,7 @@ var reformatTimeTicks = function(chart, zoom) {
 		"1w"	   : function(string) {if (string.slice(8,10)==="00") {
 										   return string.slice(0,6);
 									   } else {
-									   	   return string;
+									   	   return string.slice(-4);
 									   }}
 	}
 	if (zoom === "1d" || zoom === "1h") {
