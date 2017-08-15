@@ -118,7 +118,11 @@ var reformatTimeTicks = function(chart, zoom) {
 		"1y" 	   : function(string) {return string.slice(0,-4)+"'"+string.slice(-2)},
 		"3m"	   : function(string) {return string.slice(0,6)},
 		"1m"	   : function(string) {return string.slice(0,6)},
-		"1w"	   : function(string) {if (string.slice(8,10)==="00") {return string.slice(0,6)}}
+		"1w"	   : function(string) {if (string.slice(8,10)==="00") {
+										   return string.slice(0,6);
+									   } else {
+									   	   return string;
+									   }}
 	}
 	if (zoom === "1d" || zoom === "1h") {
 		return
