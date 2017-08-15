@@ -2719,6 +2719,7 @@
 			list-style: none;
 			margin: 2em 2em 1em 2em;
 			padding-left: 0;
+			text-align: center;
 		}
 
 			ul.actions li {
