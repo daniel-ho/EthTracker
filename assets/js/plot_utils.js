@@ -110,3 +110,22 @@ var getTickStep = function(diff) {
 		return 0.2;
 	}
 }
+
+var reformatTimeTicks = function(chart, zoom) {
+	var x = chart.value.axes[0];
+	var zoomToSlice = {
+		"All Time" : function(string) {return string.slice(0,-4)+"'"+string.slice(-2)},
+		"1y" 	   : function(string) {return string.slice(0,-4)+"'"+string.slice(-2)},
+		"3m"	   : function(string) {return string.slice(0,6)},
+		"1m"	   : function(string) {return string.slice(0,6)},
+		"1w"	   : function(string) {if (string.slice(8,10)==="00") {return string.slice(0,6)}}
+	}
+	if (zoom === "1d" || zoom === "1h") {
+		return
+	} else {
+		x.shapes.selectAll("text").each(function(d) {
+		curr = d3.select(this).html();
+		d3.select(this).text(zoomToSlice[zoom](curr));
+		})
+	}
+}

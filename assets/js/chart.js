@@ -58,6 +58,7 @@ var drawChart = function(chart, high, low, zoom, delay) {
 
 	// Draw chart with delay
 	chart.value.draw(delay);
+	reformatTimeTicks(chart, zoom);
 }
 
 // Callback function for plotting input data
@@ -103,4 +104,5 @@ window.onresize = function() {
 	var height = getChartHeight(id);
 	ethChart.value.svg[0][0].setAttribute("viewBox", "0 0 " + width + " " + height);
 	ethChart.value.draw(0, true);
+	reformatTimeTicks(ethChart, ethChart.curr_zoom);
 }

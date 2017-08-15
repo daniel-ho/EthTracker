@@ -46,4 +46,5 @@ window.onresize = function() {
 	var height = getChartHeight(id);
 	timelineChart.value.svg[0][0].setAttribute("viewBox", "0 0 " + width + " " + height);
 	timelineChart.value.draw(0, true);
+	reformatTimeTicks(timelineChart, timelineChart.curr_zoom);
 }
