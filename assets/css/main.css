@@ -1893,7 +1893,7 @@
 		transition: border-color 0.2s ease;
 		background-color: transparent;
 		border: solid 1px !important;
-		border-color: rgba(255, 255, 255, 0.15) !important;
+		border-color: rgba(0, 0, 0, 0.25) !important;
 		border-radius: 3em;
 		color: #ffffff !important;
 		cursor: pointer;
@@ -1979,7 +1979,7 @@
 		input[type="button"].special,
 		button.special,
 		.button.special {
-			background-color: #ffffff;
+			background-color: #d1d1d1;
 			color: #000000 !important;
 		}
 
@@ -2723,7 +2723,7 @@
 
 			ul.actions li {
 				display: inline-block;
-				padding: 0 1em 0 0;
+				padding: 0 1em 1em 0;
 				vertical-align: middle;
 			}
 
