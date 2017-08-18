@@ -6,15 +6,15 @@ var createDom = function(pair) {
 	var wrapper = document.getElementById("intro");
 	var div = document.createElement("div");
 	div.className = "inner";
-	var html = '<h1><span id="fsym_'+ pair +'"></span> <span> - </span> <span id="tsym_'+ pair +'"></span>   <strong><span class="price" id="price_'+ pair +'"></span></strong></h1>';
-	html += '<div class="label">24h Change: <span class="value" id="change_'+ pair +'"></span> (<span class="value" id="changepct_'+ pair +'"></span>)</div>';
-	html += '<div class="label">Last Market: <span class="market" id="market_'+ pair +'"></span></div>';
-	html += '<div class="label">Last Trade Id: <span class="value" id="tradeid_'+ pair +'"></span></div>';
-	html += '<div class="label">Last Trade Volume: <span class="value" id="volume_'+ pair +'"></span></div>';
-	html += '<div class="label">Last Trade VolumeTo: <span class="value" id="volumeto_'+ pair +'"></span></div>';
-	html += '<div class="label">24h Volume: <span class="value" id="24volume_'+ pair +'"></span></div>';
-	html += '<div class="label">24h VolumeTo: <span class="value" id="24volumeto_'+ pair +'"></span></div>';
-	html += '<div class="source"> Source: <a href="http://www.cryptocompare.com">CryptoCompare</a></div>';
+	var html = '<h1><span id="fsym_'+ pair +'"></span> <span> - </span> <span id="tsym_'+ pair +'"></span> <span id="price_'+ pair +'"></span></h1>';
+	html += '<div class="label"><strong>24h Change: </strong><span id="change_'+ pair +'"></span> (<span id="changepct_'+ pair +'"></span>)</div>';
+	html += '<div class="label"><strong>Last Market: </strong><span id="market_'+ pair +'"></span></div>';
+	html += '<div class="label"><strong>Last Trade Id: </strong><span id="tradeid_'+ pair +'"></span></div>';
+	html += '<div class="label"><strong>Last Trade Volume: </strong><span id="volume_'+ pair +'"></span></div>';
+	html += '<div class="label"><strong>Last Trade VolumeTo: </strong><span id="volumeto_'+ pair +'"></span></div>';
+	html += '<div class="label"><strong>24h Volume: </strong><span id="24volume_'+ pair +'"></span></div>';
+	html += '<div class="label"><strong>24h VolumeTo: </strong><span id="24volumeto_'+ pair +'"></span></div>';
+	html += '<div class="label"><strong>Source: </strong><a href="http://www.cryptocompare.com">CryptoCompare</a></div>';
 	div.innerHTML = html;
 	wrapper.appendChild(div);
 };
@@ -36,16 +36,6 @@ var displayQuote = function(_quote) {
 	document.getElementById("tradeid_" + pair).innerHTML = _quote.LASTTRADEID.toFixed(0);
 	document.getElementById("change_" + pair).innerHTML = CCC.convertValueToDisplay(tsym, _quote.CHANGE24H);
 	document.getElementById("changepct_" + pair).innerHTML = _quote.CHANGEPCT24H.toFixed(2) + "%";
-
-	if (quote.FLAGS === "1"){
-		document.getElementById("price").className = "up";
-	} 
-	else if (quote.FLAGS === "2") {
-		document.getElementById("price").className = "down";
-	}
-	else if (quote.FLAGS === "4") {
-		document.getElementById("price").className = "";
-	}
 
 	document.title = "($" + _quote.PRICE.toFixed(2) + ") EthTracker"
 }

@@ -100,10 +100,12 @@ var getTickStep = function(diff) {
 		return 50;
 	} else if (diff > 40) {
 		return 10;
-	} else if (diff > 20) {
+	} else if (diff > 15) {
 		return 5;
-	} else if (diff > 5) {
+	} else if (diff > 8) {
 		return 2;
+	} else if (diff > 5) {
+		return 1;
 	} else if (diff > 1.5) {
 		return 0.5;
 	} else {
@@ -127,7 +129,7 @@ var reformatTimeTicks = function(chart, zoom) {
 	if (zoom === "1d" || zoom === "1h") {
 		return
 	} else {
-		x.shapes.selectAll("text").each(function(d) {
+		x.shapes.selectAll("text").each(function() {
 		curr = d3.select(this).html();
 		d3.select(this).text(zoomToSlice[zoom](curr));
 		})
