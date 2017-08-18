@@ -1686,7 +1686,7 @@
 		}
 
 	strong, b {
-		color: #ffffff;
+		color: rgba(0,0,0,0.75);
 		font-weight: bold;
 	}
 
