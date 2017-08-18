@@ -3,7 +3,7 @@
 var quote = {};
 
 var createDom = function(pair) {
-	var wrapper = document.getElementById("intro");
+	var wrapper = document.getElementById("home");
 	var div = document.createElement("div");
 	div.className = "inner";
 	var html = '<h1><span id="fsym_'+ pair +'"></span> <span> - </span> <span id="tsym_'+ pair +'"></span> <span id="price_'+ pair +'"></span></h1>';
