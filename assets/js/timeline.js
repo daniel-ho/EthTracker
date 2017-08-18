@@ -33,13 +33,16 @@ timelineData = [{"time" : "2015 Nov 15 00:00", "close" : "0.93", "Event" : "DevC
 				{"time" : "2017 Aug 9 00:00", "close" : "298.28", "Event" : "Vitalik Buterin and Joseph Poon release paper on Plasma, framework for significantly improving scalability of Ethereum network"},
 				{"time" : "2017 Aug 11 00:00", "close" : "308.02", "Event" : "Bitfinex announces plans to discontinue service to U.S. customers following SEC ruling"}]
 
+// Callback function to overlay scatter plot on area plot
 var overlayEvents = function() {
 	eventSeries = timelineChart.value.addSeries("Event", dimple.plot.bubble);
 	eventSeries.data = timelineData;
 }
 
+// Initial and only call to create timeline chart
 updatePlot(timelineChart, "section#timeline", "All Time", overlayEvents);
 
+// Window resize event handler
 window.onresize = function() {
 	var id = "section#timeline"
 	var width = getChartWidth(id);

@@ -83,6 +83,8 @@ var addZero = function(n) {
 	return n
 }
 
+/* Helper functions to properly set svg dimensions */
+
 var getChartWidth = function(id) {
 	return $("section#charts").select().width();
 }
@@ -94,6 +96,8 @@ var getChartHeight = function(id) {
 	}
 	return base;
 }
+
+/* Helper functions to format x and y axes ticks of charts */
 
 var getTickStep = function(diff) {
 	if (diff > 100) {

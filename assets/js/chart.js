@@ -77,7 +77,7 @@ var plot = function(chart, id, input, zoom, overlay_callback) {
 	drawChart(chart, high, low, zoom, delay);
 }
 
-// Update plot once per minute
+// Function to request current data and update plot
 var updatePlot = function(chart, id, zoom, overlay_callback) {
 	chart.curr_zoom = zoom;
 	chart.url = zoomToURL[zoom];
@@ -94,9 +94,12 @@ var updatePlot = function(chart, id, zoom, overlay_callback) {
 	xhr.send();
 }
 
+// Initialize plot at 1d zoom and update every minute
 updatePlot(ethChart, "section#charts", '1d', null);
 setInterval(function() {updatePlot(ethChart, "section#charts", ethChart.curr_zoom, null);}, 60000);
 
+
+// Window resize event handler
 window.onresize = function() {
 	var id = "section#charts"
 	var width = getChartWidth(id);
