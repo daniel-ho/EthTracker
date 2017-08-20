@@ -110,7 +110,7 @@ var getTickStep = function(diff) {
 		return 2;
 	} else if (diff > 4) {
 		return 1;
-	} else if (diff > 1.75) {
+	} else if (diff > 1.6) {
 		return 0.5;
 	} else {
 		return 0.2;
