@@ -15,10 +15,8 @@ var createChart = function(chart, id, data, overlay_callback) {
 
 	chart.value = new dimple.chart(svg);
 	var x = chart.value.addTimeAxis("x", "time", "%Y %b %d %H:%M", "%H:%M");
-	x.fontFamily = "Arial, Helvetica, sans-serif";
 	var y = chart.value.addMeasureAxis("y", "close");
 	y.title = "Closing Price";
-	y.fontFamily = "Arial, Helvetica, sans-serif";
 	y.tickFormat = ",.2f";
 	var series = chart.value.addSeries(null, dimple.plot.area);
 	series.data = data;
