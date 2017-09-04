@@ -100,8 +100,10 @@ var getChartHeight = function(id) {
 /* Helper functions to format x and y axes ticks of charts */
 
 var getTickStep = function(diff) {
-	if (diff > 100) {
+	if (diff > 120) {
 		return 50;
+	} else if (diff > 100) {
+		return 20;
 	} else if (diff > 40) {
 		return 10;
 	} else if (diff >= 16) {
