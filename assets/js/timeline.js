@@ -31,7 +31,10 @@ timelineData = [{"time" : "2015 Nov 15 00:00", "close" : "0.93", "Event" : "DevC
 				{"time" : "2017 Aug 1 00:00", "close" : "218.12", "Event" : "Bitcoin hard fork resulting in Bitcoin Cash split from Bitcoin"},
 				{"time" : "2017 Aug 7 00:00", "close" : "296.51", "Event" : "HP aims to formally announce EEA membership and interest in blockchain technology"},
 				{"time" : "2017 Aug 9 00:00", "close" : "298.28", "Event" : "Vitalik Buterin and Joseph Poon release paper on Plasma, framework for significantly improving scalability of Ethereum network"},
-				{"time" : "2017 Aug 11 00:00", "close" : "308.02", "Event" : "Bitfinex announces plans to discontinue service to U.S. customers following SEC ruling"}]
+				{"time" : "2017 Aug 11 00:00", "close" : "308.02", "Event" : "Bitfinex announces plans to discontinue service to U.S. customers following SEC ruling"},
+				{"time" : "2017 Aug 30 00:00", "close" : "388.33", "Event" : "Ethereum Foundation partners with Russian Development Bank to support new blockchain research center"},
+				{"time" : "2017 Sep 4 00:00", "close" : "317.94", "Event" : "The People’s Bank of China rules that ICOs are illegal and demands all related fundraising activity to be stopped immediately"},
+				{"time" : "2017 Sep 6 00:00", "close" : "335.37", "Event" : "Raiden testnet successfully deployed"}]
 
 // Callback function to overlay scatter plot on area plot
 var overlayEvents = function() {
