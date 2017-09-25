@@ -102,11 +102,11 @@ var getChartHeight = function(id) {
 var getTickStep = function(diff) {
 	if (diff > 120) {
 		return 50;
-	} else if (diff > 100) {
+	} else if (diff > 90) {
 		return 20;
 	} else if (diff > 40) {
 		return 10;
-	} else if (diff >= 16) {
+	} else if (diff >= 17) {
 		return 5;
 	} else if (diff > 8) {
 		return 2;

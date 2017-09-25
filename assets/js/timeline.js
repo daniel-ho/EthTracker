@@ -4,6 +4,10 @@ timelineChart = {value 	   : undefined,
 				 url 	   : "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&e=CCCAGG&allData=true",
 				 curr_zoom : "All Time"};
 
+navigationChart = {value     : undefined,
+				   url 	     : "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&e=CCCAGG&allData=true",
+				   curr_zoom : "All Time"};
+
 timelineData = [{"time" : "2015 Nov 15 00:00", "close" : "0.93", "Event" : "DevCon1 held in London, main points involved scalability and security"},
 				{"time" : "2016 Mar 14 00:00", "close" : "13.09", "Event" : "Homestead release of Ethereum"},
 				{"time" : "2016 May 19 00:00", "close" : "13.73", "Event" : "Coinbase announces plans to offer trading of Ether on GDAX"},
@@ -34,7 +38,8 @@ timelineData = [{"time" : "2015 Nov 15 00:00", "close" : "0.93", "Event" : "DevC
 				{"time" : "2017 Aug 11 00:00", "close" : "308.02", "Event" : "Bitfinex announces plans to discontinue service to U.S. customers following SEC ruling"},
 				{"time" : "2017 Aug 30 00:00", "close" : "388.33", "Event" : "Ethereum Foundation partners with Russian Development Bank to support new blockchain research center"},
 				{"time" : "2017 Sep 4 00:00", "close" : "317.94", "Event" : "The People’s Bank of China rules that ICOs are illegal and demands all related fundraising activity to be stopped immediately"},
-				{"time" : "2017 Sep 6 00:00", "close" : "335.37", "Event" : "Raiden testnet successfully deployed"}]
+				{"time" : "2017 Sep 6 00:00", "close" : "335.37", "Event" : "Raiden testnet successfully deployed"},
+				{"time" : "2017 Sep 14 00:00", "close" : "259.57", "Event" : "BTCChina announces it will officially stop all trading by Sep. 30"}]
 
 // Callback function to overlay scatter plot on area plot
 var overlayEvents = function() {
@@ -44,6 +49,7 @@ var overlayEvents = function() {
 
 // Initial and only call to create timeline chart
 updatePlot(timelineChart, "section#timeline", "All Time", overlayEvents);
+
 
 // Window resize event handler
 window.onresize = function() {
